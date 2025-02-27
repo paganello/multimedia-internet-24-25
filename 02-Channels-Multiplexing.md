@@ -86,8 +86,18 @@ Ad esempio, per N=4, i codici ortogonali sono:
 
 ![CD Multiplexing](./images/02-6.png)
 
-
 Nella multiplazione a divisione di codice, il codice "espande" la larghezza di banda radio del segnale, permettendo a diversi segnali di utilizzare la stessa banda radio.
+
+![CD Multiplexing](./images/02-7.png)
+
+### CDMA (Code Division Multiple Access)
+CDMA (Code Division Multiple Access) è un caso specifico di CDM, usato nei sistemi di telecomunicazione per permettere a più utenti di accedere simultaneamente a un canale senza interferenze significative.
+
+Il segnale dell’utente viene moltiplicato per un codice pseudo-casuale (PN) ad alta velocità (chiamata chip rate).
+-  Se il codice è lungo, il segnale viene spalmato su una banda più larga.
+-  Il codice è ortogonale rispetto agli altri utenti, evitando interferenze.
+
+A questo punto il segnale "spalmato" viene trasmesso nell’etere sulla stessa frequenza di altri utenti, generando un segnale complessivo che sembra rumore.
 
 ## WDM (Wavelength Division Multiplexing)
 
