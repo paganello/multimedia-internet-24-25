@@ -99,49 +99,37 @@ Il segnale dell’utente viene moltiplicato per un codice pseudo-casuale (PN) ad
 
 A questo punto il segnale "spalmato" viene trasmesso nell’etere sulla stessa frequenza di altri utenti, generando un segnale complessivo che sembra rumore.
 
-## WDM (Wavelength Division Multiplexing)
+## 2.7 - WDM (Wavelength Division Multiplexing)
 
 Il Wavelength Division Multiplexing (WDM) è simile all'FDM; viene chiamato WDM per ragioni storiche, legate allo sviluppo delle fibre ottiche. Diverse segnali vengono modulati utilizzando diverse lunghezze d'onda su fibre ottiche. Ogni lunghezza d'onda può trasportare enormi quantità di informazioni (5-10 Gbit/s).
 
 Il limite tecnologico è legato alla stabilità dei LED/Laser utilizzati per modulare i segnali, nonché dalla precisione dei filtri ottici. Attualmente esistono dispositivi commerciali con 16 - 128 lunghezze d'onda (Dense WDM, DWDM).
 
-## Accesso Multiplo
+## 2.8 - Accesso Multiplo
 
 L'accesso multiplo è simile al multiplexing, ma concettualmente è molto diverso. Infatti, l'accesso multiplo è legato ai canali broadcast. Quindi, le stazioni/nodi che accedono al canale broadcast sono distanti, quindi si trovano fisicamente in luoghi diversi, possibilmente molto lontani l'uno dall'altro, e quindi hanno bisogno di coordinarsi tra loro per accedere al canale senza collisioni!
 
 ### FDMA (Frequency Division Multiple Access)
 
-L'FDMA è analogo all'FDM. Stazioni/nodi diversi devono coordinarsi per accedere al canale, ma questo non è un problema con l'FDMA. Esempi di utilizzo includono la trasmissione di stazioni TV o radio e il sistema cellulare TACS (Total Access Cellular System) che utilizzava sottocanali da 25 kHz per le chiamate telefoniche.
+L'FDMA è analogo all'FDM. Stazioni/nodi diversi devono coordinarsi per accedere al canale, ma questo non è un problema con l'FDMA. Esempi di utilizzo includono:
+1. la trasmissione di stazioni TV o radio 
+2. il sistema cellulare TACS (Total Access Cellular System) che utilizzava sottocanali da 25 kHz per le chiamate telefoniche.
 
 ### TDMA (Time Division Multiple Access)
 
 L'accesso multiplo a divisione di tempo (TDMA) è simile al TDM, ma richiede che le stazioni si coordinino tra loro per trovare un riferimento temporale comune (necessario per sapere quando iniziano e finiscono gli slot/frame). Poiché la sincronizzazione non può essere perfetta, sono necessari tempi di guardia per evitare sovrapposizioni.
+![TDMA](./images/02-8.png)
 
-## Canali Broadcast Centralizzati e Distribuiti
+## 2.9 - Canali Broadcast Centralizzati e Distribuiti
 
 I canali broadcast possono essere classificati in base alla loro architettura:
 
-### Canali Broadcast Centralizzati
+1. **Canali Broadcast Centralizzati**: Questi canali hanno un punto di accesso fisso (sistemi cellulari, WLAN, WMAN) che gestisce le connessioni con i dispositivi mobili. La copertura cellulare si ottiene mediante stazioni base (BS) o punti di accesso che forniscono accesso radio alle stazioni mobili (MS) all'interno di un'area di servizio chiamata cella.
+![](./images/02-9.png)
 
-Questi canali hanno un punto di accesso fisso (sistemi cellulari, WLAN, WMAN) che gestisce le connessioni con i dispositivi mobili. La copertura cellulare si ottiene mediante stazioni base (BS) o punti di accesso che forniscono accesso radio alle stazioni mobili (MS) all'interno di un'area di servizio chiamata cella.
+2. **Canali Broadcast Distribuiti**: Nei canali broadcast distribuiti, come le reti wireless ad-hoc (reti mesh, reti di sensori), le connessioni avvengono direttamente tra dispositivi mobili. In operazioni multi-hop, le stazioni mobili possono inoltrare informazioni, fungendo da relay tra la sorgente e la destinazione.
 
-### Canali Broadcast Distribuiti
-
-Nei canali broadcast distribuiti, come le reti wireless ad-hoc (reti mesh, reti di sensori), le connessioni avvengono direttamente tra dispositivi mobili. In operazioni multi-hop, le stazioni mobili possono inoltrare informazioni, fungendo da relay tra la sorgente e la destinazione.
-
-## Differenze tra Reti Cablate e Wireless
-
-Le principali differenze tra reti cablate e wireless sono:
-
-1. Mezzo di trasmissione condiviso:
-   - Necessità di meccanismi di accesso multiplo
-   - Riutilizzo delle risorse radio
-
-2. Canale radio:
-   - Caratteristiche del canale variabili
-   - Schemi di modulazione e codifica avanzati
-
-## Sincronizzazione nei Canali Broadcast Centralizzati
+## 2.10 - Sincronizzazione nei Canali Broadcast Centralizzati
 
 Nei canali broadcast centralizzati, la stazione base è fondamentale per garantire la sincronizzazione tra i terminali mobili. Le sue trasmissioni vengono utilizzate per sincronizzare tutte le trasmissioni (ad esempio, inviando un segnale per indicare quando inizia il frame).
 
@@ -154,3 +142,99 @@ Ovviamente, il tempo di guardia è dominato dal nodo più lontano dalla BS.
 ### Timing Advance
 
 Per ottimizzare l'uso del canale, si può utilizzare la tecnica del Timing Advance: se ogni nodo conosce il ritardo di propagazione verso la BS, può anticipare la sua trasmissione! Il ritardo di propagazione τ deve essere stimato (può variare nel tempo). L'errore di stima è ancora possibile: i tempi di guardia sono ridotti, ma non sono nulli! Questa tecnica è utilizzata nel sistema GSM.
+
+### Efficiency
+Diepnde srattamente dal ratio Tg/Ti. dove Ti altrono non è che lo slot di trasmissione meno la banda di guardia, mentre Tg è la banda di guardia stessa.
+![](./images/02-10.png)
+
+
+## 2.11 - Sistemi Cellulari Mobili
+
+I sistemi cellulari mobili si sono evoluti attraverso diverse generazioni, ciascuna con caratteristiche e tecnologie di accesso radio distintive. Possiamo vedere 2 tipi di comunicazione:
+1. UpLink: si ha Accesso Multiplo dai MS (Mobile Stations) alla BS (Base Station).
+2. DownLink: si ha multiplexing dalla BS veso le MS.
+
+#### Prima Generazione (1G)
+- TACS (Europa)
+- AMPS (Stati Uniti)
+- Utilizzava FDM/FDMA (downlink/uplink)
+
+#### Seconda Generazione (2G)
+- GSM (Europa e poi mondiale)
+- D-AMPS (Stati Uniti)
+- Multi-carrier TDM/TDMA
+- 
+![](./images/02-11.png)
+
+#### Terza Generazione (3G)
+- UMTS
+- Utilizzava CDM/CDMA
+- HSPA (High Speed Packet Access, nota anche come 3.5G)
+
+#### Quarta Generazione (4G)
+- LTE (Long Term Evolution)
+
+![](./images/02-13.png)
+
+## 2.12 - Riuso di Frequenza
+
+Il riuso di frequenza nasce da un problema fondamentale: le frequenze disponibili non sono sufficienti per tutti gli utenti. La soluzione è riutilizzare le stesse frequenze in celle diverse attraverso il riuso spaziale. Nella pratica questa tecnica consiste nel riutiulizzare la stessa banda di frequenze utlizzata nella comunicazione BS-MS con una seconda coppia BS-MS a un certo numero di KM di distanza.
+
+### Interferenza Co-Canale
+
+Il riuso spaziale causa inevitabilmente l'interferenza co-canale. Questa interferenza è una caratteristica intrinseca dei sistemi cellulari. Generalmente, si considera che la qualità del sistema sia buona quando il rapporto tra la potenza del segnale e la potenza di interferenza (Signal-to-Interference Ratio, SIR) è superiore a una soglia predefinita.
+
+### Forma delle Celle
+
+Tradizionalmente, per descrivere in modo semplificato la struttura dei sistemi cellulari, le celle vengono rappresentate con forma esagonale. Sebbene nella realtà la forma delle celle sia molto più irregolare a causa della posizione delle stazioni base e delle caratteristiche di propagazione dei segnali, la rappresentazione esagonale è un buon approccio per dimensionare il sistema e comprenderne i principi base.
+
+### Dimensionamento del Cluster
+
+Il processo di dimensionamento del cluster prevede:
+
+1. Suddividere tutte le frequenze disponibili in K gruppi
+2. Assegnare un gruppo a ogni cella massimizzando la distanza tra celle che utilizzano lo stesso gruppo di frequenze
+
+L'efficienza del riuso di frequenza è pari a 1/K. I valori possibili per K includono: 1, 3, 4, 7, 9, 12, 13, ecc.
+
+![](./images/02-12.png)
+
+$P_r= \frac{P_t \cdot G}{D_m}$.
+
+![](./images/02-14.png)
+
+in base al numero K la distanza tra celle che utilizzano lo stesso set di frequenze cambia (mentre rimane inveriato il "raggio" degli esagoni)
+
+### Calcolo del SIR (Signal-to-Interference Ratio)
+
+Il dimensionamento dipende dalla stima del valore minimo di SIR tollerato dal sistema. Alcuni fattori chiave nel calcolo includono:
+- Potenza ricevuta
+- Esponente di perdita di percorso
+- Distanze tra celle
+
+Da cui possiamo dedurre:
+$K_min=\frac{(6SIR)^{2/η}}{3}$
+Approssimato al numero di K successivo possibile.
+### Considerazioni sul Dimensionamento
+
+Nel modello di dimensionamento vengono fatte diverse semplificazioni:
+- Considerazione delle sole distanze
+- Valutazione solo del primo anello di interferenti
+- Assenza di rumore termico
+- Considerazione della sola perdita di percorso
+
+L'obiettivo è garantire un buon SIR a tutti gli utenti, considerando i casi più critici.
+
+## 2.13 - Antenne Settoriali
+L'uso di antenne direttive permette di modificare il layout cellulare e ridurre l'interferenza ricevuta. Nei sistemi cellulari, è comune l'uso di antenne con un angolo principale di 120°.
+
+### Vincoli di Assegnazione
+
+L'assegnazione dei canali è soggetta a vincoli aggiuntivi:
+- Le frequenze adiacenti possono generare interferenze reciproche
+- Le celle dello stesso sito non possono utilizzare frequenze adiacenti
+- I lobi secondari delle antenne possono generare interferenze nelle celle vicine
+
+## 2.14 - Layout Cellulari
+
+Un'osservazione importante è che la formula semplificata per il dimensionamento del cluster non dipende dal raggio della cella, ma solo dai rapporti di distanza. Questo offre la libertà di pianificare il layout cellulare (dimensioni delle celle) in base alla densità di traffico stimata in diverse aree.
