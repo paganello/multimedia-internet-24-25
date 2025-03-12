@@ -199,7 +199,9 @@ L'efficienza del riuso di frequenza è pari a 1/K. I valori possibili per K incl
 
 ![](./images/02-12.png)
 
-$P_r= \frac{P_t \cdot G}{D_m}$.
+$$
+P_r= \frac{P_t \cdot G}{D_m}
+$$
 
 ![](./images/02-14.png)
 
