@@ -145,6 +145,9 @@ STP permette di ottenere una topologia logica ad albero (tree) da una rete fisic
 
 <div align="center">
   <img src="./images/03-6.png" alt="" width="450">
+</div>
+
+<div align="center">
   <img src="./images/03-7.png" alt="" width="450">
 </div>
 
