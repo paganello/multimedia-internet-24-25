@@ -10,7 +10,11 @@ Un protocollo di routing comprende due funzionalità principali:
 
 In pratica, queste due fasi sono strettamente correlate: il modo in cui vengono create le tabelle di routing dipende dallo scambio di messaggi di routing e viceversa.
 
-## 5.1 - Algoritmi di Routing
+<div align="center">
+  <img src="./images/05-3.png" alt="DUMB" width="450">
+</div>
+
+#### Algoritmi di Routing
 
 Un algoritmo di routing definisce i criteri per scegliere un percorso tra una sorgente e una destinazione, e costruisce le tabelle di routing. I criteri di scelta dipendono dal tipo di rete (datagramma o circuito virtuale).
 
@@ -27,7 +31,11 @@ Una pianificazione intelligente del routing può aumentare significativamente la
 
 ## 5.2 - Routing in Internet
 
-Nelle reti IP, l'inoltro dei pacchetti è basato sulla destinazione e sul next-hop. Ciò significa che tutti i pacchetti destinati a D che arrivano al router R seguono lo stesso percorso dopo R.
+Nelle reti IP, l'inoltro dei pacchetti è basato sulla destinazione e sul next-hop. Ciò significa che tutti i pacchetti destinati a D che arrivano al router R seguono lo stesso percorso dopo R. (?)
+
+<div align="center">
+  <img src="./images/05-4.png" alt="DUMB" width="450">
+</div>
 
 Questo impone alcuni vincoli sul routing:
 - Tutti i percorsi da tutte le sorgenti a una destinazione D devono formare un albero

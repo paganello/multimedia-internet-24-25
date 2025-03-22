@@ -21,19 +21,19 @@ Il corso si conclude con argomenti avanzati quali reti wireless, Internet of Thi
 
 ---
 
-## Concetti Fondamentali di Internet
+## 0.1 - Concetti Fondamentali di Internet
 
 ### Cos'è Internet?
 Internet è un'infrastruttura di comunicazione globale composta da milioni di computer (host) connessi tramite collegamenti fisici (fibra, cavi, wireless, satellite) e dispositivi di rete (router). Questa rete permette alle applicazioni di comunicare a distanza seguendo protocolli standardizzati.
 
-### Protocolli di Comunicazione
-I protocolli sono regole che governano lo scambio di informazioni tra dispositivi in rete, similmente ai protocolli di comunicazione umana. Esempi includono TCP/IP, HTTP, SMTP.
+I protocolli sono regole che governano lo scambio di informazioni tra dispositivi in rete, similmente ai protocolli di comunicazione umana. Esempi includono TCP/IP, HTTP, SMTP, ecc.
 
-### Architettura di Internet
 Internet è strutturata in:
 - **Terminali (host)**: eseguono applicazioni (web, email, ecc.)
 - **Core di rete**: router interconnessi che instradano i pacchetti
 - **ISP (Internet Service Provider)**: forniscono connettività a vari livelli (locale, regionale, nazionale, internazionale)
+- **Autonomous System**: Un AS è un sistema IP gestito da una singola organizzazione. La maggior parte degli ISP gestitiscono un proprio AS. 
+- **Interior Gateway**: Routers che si interpongono tra i diversi Autonomous Systems.
 
 ### Tecnologie di Commutazione
 Internet utilizza principalmente la **commutazione di pacchetto**, dove le informazioni vengono divise in pacchetti inviati indipendentemente attraverso la rete. Questo differisce dalla **commutazione di circuito** (usata nelle reti telefoniche tradizionali) dove viene riservato un percorso dedicato per l'intera durata della comunicazione (la comunicazione era identificata dal percorso, non dall'associazione IP sorgente e IP destinatario).
@@ -47,7 +47,7 @@ Internet utilizza principalmente la **commutazione di pacchetto**, dove le infor
 - Possibili ritardi e perdite di pacchetti
 - Necessità di protocolli per il controllo della congestione e il recupero delle perdite
 
-Nelle reti a pacchetto i messaggi vengono splittati in pacchetti, i quali poi vengo uno a uno inoltrati sullarete. Essi possono intraprendere percorsi differenti nel viaggio tra mittente e destinatario, ecco perchè nasce la necessistà di verificare che le rotte non siano congestionate e che tutti i pacchetti arrivino a destinazione.  
+Nelle reti a pacchetto i messaggi vengono splittati in pacchetti, i quali poi vengo uno a uno inoltrati sulla rete. Essi possono intraprendere percorsi differenti nel viaggio tra mittente e destinatario, ecco perchè nasce la necessistà di verificare che le rotte non siano congestionate e che tutti i pacchetti arrivino a destinazione.
 
 ### Ritardi e Perdite nella Rete
 Ogni pacchetto subisce vari tipi di ritardi:
@@ -58,10 +58,6 @@ Ogni pacchetto subisce vari tipi di ritardi:
 
 I pacchetti possono essere persi quando le code dei router si riempiono completamente.
 
-### Internet Taxonomy
-- **Autonomous System**: Un AS è un sistema IP gestito da una singola organizzazione. La maggior parte degli ISP gestitiscono un proprio AS. 
-- **Interior Gateway**: Routers che si interpongono tra i diversi Autonomous Systems.
-
 ### Accesso a Internet
 Le principali tecnologie di accesso includono:
 - **Dial-up**: accesso tramite PSTN
@@ -71,15 +67,11 @@ Le principali tecnologie di accesso includono:
 - **Reti mesh e ad hoc**: connessioni peer-to-peer wireless
 - **Reti di sensori wireless**: dispositivi piccoli ed economici per IoT
 
-### Standardizzazione di Internet
-Gli standard Internet sono documenti pubblici chiamati RFC (Request For Comments), coordinati dall'Internet Engineering Task Force (IETF).
+Gli standard Internet sono documenti pubblici chiamati RFC (Request For Comments), coordinati dall'Internet Engineering Task Force (IETF). Internet ha avuto origine negli anni '60 con ARPANET, evolvendosi attraverso l'introduzione dei protocolli TCP/IP negli anni '80, la nascita del Web negli anni '90, fino all'attuale ecosistema con miliardi di utenti e numerose applicazioni (messaging, condivisione file, telefonia IP).
+<br><br>
 
-### Evoluzione di Internet
-Internet ha avuto origine negli anni '60 con ARPANET, evolvendosi attraverso l'introduzione dei protocolli TCP/IP negli anni '80, la nascita del Web negli anni '90, fino all'attuale ecosistema con miliardi di utenti e numerose applicazioni (messaging, condivisione file, telefonia IP).
 
----
-
-## Concetto di Store and Forward
+## 0.2 - Concetto di Store and Forward
 
 Il **meccanismo di Store and Forward** (memorizza e inoltra) è un principio fondamentale nelle reti a commutazione di pacchetto, come Internet. Questo metodo definisce come i pacchetti vengono gestiti dai router e altri dispositivi di rete durante il loro percorso dalla sorgente alla destinazione.
 
@@ -102,7 +94,9 @@ Nel meccanismo Store and Forward intervengono due componenti di tempo principali
 
 Il tempo di trasmissione è il tempo necessario per inserire tutti i bit di un pacchetto sul collegamento di uscita:
 
-$T_{trasmissione} = \frac{L}{R}$
+$$
+T_{trasmissione} = \frac{L}{R}
+$$
 
 Dove:
 - $L$ = lunghezza del pacchetto in bit
@@ -112,19 +106,14 @@ Dove:
 
 Il tempo di propagazione è il tempo necessario affinché un bit viaggi da un nodo al successivo:
 
-$\tau_{propagazione} = \frac{l}{C}$
+$$
+\tau_{propagazione} = \frac{l}{C}
+$$
 
 Dove:
 - $l$ = lunghezza fisica del collegamento in metri
 - $C$ = velocità di propagazione nel mezzo (circa 3×10⁸ m/s per la fibra ottica)
 
-### Impatto sul Ritardo End-to-End
-
-In una rete con meccanismo Store and Forward, il ritardo totale end-to-end aumenta significativamente con:
-
-1. **Numero di hop**: Ogni router lungo il percorso deve ricevere l'intero pacchetto prima di iniziare l'inoltro
-2. **Dimensione del pacchetto**: Pacchetti più grandi richiedono più tempo per essere completamente ricevuti
-3. **Velocità dei collegamenti**: Collegamenti più lenti aumentano il tempo di trasmissione
 
 ### Multiplexing Statistico
 I pacchetti provenienti da diverse sorgenti condividono gli stessi collegamenti di uscita, generando quindi una competizione, gestita appunto dai router. Durante la trasmissione ogni pacchetto utilizza completamente il canale e le risorse di rete vengono utilizzate in base alle esigenze attuali.

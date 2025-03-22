@@ -8,7 +8,9 @@ Per esempio, in una rete locale dove abbiamo due host A e B:
 - Host A: IP 193.17.31.45, MAC 00:9f:7a:89:90:7a
 - Host B: IP 193.17.31.55, MAC 05:98:76:6c:4a:7b
 
-Per permettere la comunicazione tra questi host, è necessario risolvere gli indirizzi IP nei corrispondenti indirizzi MAC, operazione che viene eseguita dinamicamente mediante protocolli dedicati.
+Per permettere la comunicazione tra questi host, è necessario risolvere gli indirizzi IP nei corrispondenti indirizzi MAC, operazione che viene eseguita dinamicamente mediante Address Resolution Protocol (ARP).
+
+---
 
 ## 4.1 - Protocollo di Risoluzione degli Indirizzi (ARP)
 
@@ -22,6 +24,8 @@ Il processo di risoluzione ARP funziona come segue:
 
 Nel formato del pacchetto ARP vengono specificati i campi necessari per l'operazione di risoluzione, tra cui gli indirizzi IP e MAC sia del mittente che del destinatario. La cache ARP viene utilizzata per memorizzare temporaneamente le associazioni già risolte, migliorando l'efficienza della rete riducendo il traffico broadcast.
 
+---
+
 ## 4.2 - Protocollo di Risoluzione Inversa degli Indirizzi (RARP)
 
 RARP (Reverse Address Resolution Protocol) svolge l'operazione inversa rispetto ad ARP: assegna un indirizzo IP a un indirizzo MAC noto. Questo protocollo è stato progettato principalmente per supportare le macchine diskless durante l'avvio da rete (network bootstrap), ma è ormai scarsamente utilizzato.
@@ -32,7 +36,14 @@ Il funzionamento del RARP prevede:
 
 Oggi RARP è stato largamente sostituito da protocolli più versatili come BOOTP e DHCP.
 
-## 4.3 - Gestione Dinamica degli Indirizzi
+<div align="center">
+  <img src="./images/04-1.png" width="450">
+</div>
+
+
+---
+
+## 4.3 - Gestione Dinamica degli Indirizzi & DHCP
 
 Le procedure statiche di assegnazione degli indirizzi IP presentano una flessibilità limitata. L'utilizzo di un server centrale per memorizzare la configurazione degli host offre una soluzione più efficiente.
 
@@ -44,17 +55,9 @@ La gestione dinamica degli indirizzi prevede l'utilizzo di un server per gestire
 
 1. Binding statico: il server mantiene una tabella di corrispondenza statica tra indirizzi IP e MAC. Quando riceve una richiesta, verifica nella tabella l'indirizzo MAC del mittente e gli assegna l'indirizzo IP corrispondente.
 
-2. Binding dinamico: l'insieme degli indirizzi IP può essere più ristretto rispetto al numero di host da servire. Il binding cambia nel tempo, consentendo la condivisione degli indirizzi IP tra host con diversi cicli di attività.
+2. Binding dinamico: l'insieme degli indirizzi IP può essere piccolo rispetto al numero di host da servire. Il binding cambia nel tempo, consentendo la condivisione degli indirizzi IP tra host con diversi cicli di attività.
 
-## 4.4 - Binding Dinamico
-
-Il binding dinamico è particolarmente utile quando gli host hanno vari cicli di attività. Poiché l'associazione deve essere temporanea, si utilizzano:
-- Timeout per limitare la durata dell'assegnazione
-- Procedure esplicite di rilascio degli indirizzi
-
-In questo contesto, esiste una probabilità non nulla di rifiuto dell'assegnazione. Il problema del dimensionamento dell'insieme degli indirizzi IP è simile a quello del dimensionamento dei circuiti telefonici, richiedendo un'analisi statistica del traffico e dei pattern di utilizzo.
-
-## 4.5 - Protocollo di Configurazione Dinamica degli Host (DHCP)
+#### Protocollo di Configurazione Dinamica degli Host (DHCP)
 
 DHCP (Dynamic Host Configuration Protocol), definito nell'RFC 2131, rappresenta una versione evoluta del protocollo BOOTP. Si tratta di un protocollo di livello applicativo basato sul paradigma client-server che consente l'assegnazione automatica di indirizzi IP e altri parametri di configurazione agli host di una rete.
 
@@ -79,7 +82,7 @@ Lo scambio completo di messaggi DHCP include quindi:
 - DHCP ACK: dal server per confermare la configurazione
 - DHCP RELEASE: dal client per rilasciare l'indirizzo quando non più necessario
 
-## 4.6 - Architettura DHCP Avanzata
+#### Architettura DHCP Avanzata
 
 DHCP supporta architetture multi-server per garantire ridondanza e scalabilità. Inoltre, per estendere il servizio oltre la rete locale, è possibile utilizzare i DHCP Relay, dispositivi che inoltrano i messaggi DHCP tra diverse reti IP.
 
@@ -90,5 +93,3 @@ I messaggi DHCP utilizzano UDP come protocollo di trasporto. Durante la fase di 
 - Porta destinazione: 67
 
 Questa configurazione permette al client di comunicare prima di avere un indirizzo IP valido, utilizzando il broadcast per raggiungere il server DHCP.
-
-L'architettura DHCP rappresenta una soluzione efficiente per la gestione degli indirizzi IP in reti di qualsiasi dimensione, offrendo flessibilità, scalabilità e facilità di amministrazione. La sua capacità di assegnare dinamicamente non solo indirizzi IP ma anche altri parametri di configurazione lo rende uno strumento fondamentale nell'amministrazione moderna delle reti.

@@ -1,17 +1,11 @@
 # Access Technologies
 
-## 3.1 - LAN Ethernet - IEEE 802.3
+## 3.1 - LAN Ethernet & IEEE 802.3
 
-#### IEEE 802 Working Group
-
-| Data Link Layer | Physical Layer | Medium Access Control |
-|---------------|---------------|------------------------|
-| 802.3 (Ethernet) | 802.5 (Token Ring) | 802.11 (WiFi) |
-| 802.2 (LLC) | 802.1 (Interconnessione LAN) | |
 
 #### Indirizzamento in un mezzo broadcast
 
-L'indirizzamento in una rete broadcast consente a più dispositivi di ricevere lo stesso segnale simultaneamente. Questo tipo di topologia può essere gestito tramite differenti configurazioni.
+La comunicazione in una rete broadcast consente a più dispositivi di ricevere lo stesso segnale simultaneamente. Questo tipo di topologia può essere gestito tramite differenti configurazioni.
 
 - **Topologia a stella**: Utilizza uno switch per collegare tutte le stazioni di rete.
 - **Topologia a bus (storica)**: Tutti i dispositivi sono connessi a un unico cavo condiviso.
@@ -26,20 +20,21 @@ L'indirizzamento in una rete broadcast consente a più dispositivi di ricevere l
 - **Velocità di propagazione**: 2 × 10⁸ m/s (~5 µs/km)
 - **Diametro massimo della LAN**: 2,5 km
 
-#### Differenze tra IEEE 802.3 ed Ethernet
+Inzialmente lo standard Ethernet nasce grazie all'operato del consorzio DIX, lavoro dal quale prende spunto il comitato IEEE per la realizzazione dello standard 802.3.
 
 - **IEEE 802.3** utilizza il livello LLC (802.2) sopra il MAC
 - **Ethernet** è direttamente collegato al livello di rete (IP)
-- **Identificazione protocolli**:
-  - In 802.3: lunghezza del frame (≤1500)
-  - In Ethernet: codice protocollo (>1536 o 0x0600 in hex)
+
+Questi protocolli coesistono.
+
+---
 
 ## 3.2 - Protocolli di accesso al mezzo
 
 Problema: Se più stazioni trasmettono contemporaneamente, si verificano collisioni.
-
 Soluzione: Definire protocolli per controllare l'accesso al mezzo broadcast e gestire le collisioni.
 
+Possiamo quindi idividuare 2 categorie di protocolli di accesso al mezzo trasmissivo:
 1. **Accesso ordinato**
    - TDMA (Time Division Multiple Access)
    - Round Robin
@@ -48,23 +43,26 @@ Soluzione: Definire protocolli per controllare l'accesso al mezzo broadcast e ge
    - CSMA/CD (Ethernet)
    - CSMA/CA (WiFi)
 
-#### Esempio di TDMA
+#### Protocolli ad Accesso Ordinato
 
+**TDMA**
 - Inefficiente per le LAN a traffico variabile
 - Introduce alti ritardi e riduce la capacità di throughput
 
-#### Esempio di Round Robin
+**Round Robin**
 
 - Ogni stazione ha la possibilità di trasmettere in un turno
 - Se non ha dati, passa il turno alla successiva
 - Se ha dati, trasmette fino a un massimo definito (K)
-Il master non è per forza un dispositivo speciale, semplicemente è colui che si occupa di distribuire il tokens.
+
+**Polling**
+Protocolli che si basano sulla distribuzione di un tocken da parte di un master, chi ha il tocken puo trasmettere. Il master non è per forza un dispositivo speciale, semplicemente è colui che si occupa di distribuire il tokens.
 
 <div align="center">
   <img src="./images/03-2.png" width="450">
 </div>
 
-#### Accesso casuale
+#### Protocolli ad Accesso Casuale
 In questi protocolli non esiste un sistema che organizzi l'accesso al mezzo per i dispositivi connessi alla rete.
 
 **Slotted Aloha:**
@@ -100,15 +98,18 @@ CSMA è stato creato per supportare la lettura del mezzo prima della trasmizzion
 </div>
 
 1. Ascolto del canale prima di trasmettere
-2. Se il canale è occupato, si attende
-3. Se avviene una collisione, la trasmissione viene interrotta (*Collision Detection*). La trasmissione vene abortita e vengono trasmessi 32 bit detti di *jamming*.
-4. Ritrasmissione dopo un tempo casuale (*Backoff esponenziale*)
-5. Dopo 16 tentativi falliti, il frame viene scartato
+2. Se e' libero trasmetto
+3. Se il canale è occupato, si attende
+4. Se avviene una collisione, la trasmissione viene interrotta (*Collision Detection*). La trasmissione vene abortita e vengono trasmessi 32 bit detti di *jamming*.
+5. Ritrasmissione dopo un numero di slot termporali randomico (*Backoff esponenziale*)
+6. Dopo 16 tentativi falliti, il frame viene scartato
+
+---
 
 ## 3.3 - Interconnessione delle LAN
 
 I principali dispositivi che si occupano di interconnettere le reti sono:
-- **Repeater**: Estende il segnale fisico, trasmette bit
+- **Repeater**: Estende il segnale fisico, trasmette bit. I repeater operano a livello 1 del modello OSI (Physical Layer) e non lavorano con gli indirizzi MAC.
 - **Bridge**: Filtra e inoltra i frame in base agli indirizzi MAC
 
 #### Bridge e forwarding
@@ -122,6 +123,8 @@ I principali dispositivi che si occupano di interconnettere le reti sono:
 <div align="center">
   <img src="./images/03-5.png" width="450">
 </div>
+
+---
 
 ## 3.4 - Broadcast Storm e Spanning Tree Protocol (STP)
 
