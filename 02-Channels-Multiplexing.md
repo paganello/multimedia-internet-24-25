@@ -14,11 +14,13 @@ Il ricevitore in un canale broadcast si trova ad affrontare sfide particolari: d
 
 Il multiplexing è una tecnica (astrazione) che consente di suddividere la capacità fisica di un canale per ottenere più sottocanali con velocità inferiori. Attraverso questa tecnica, un singolo mezzo di trasmissione può supportare multiple comunicazioni simultanee.
 
-### Multiplexing Fisico
+#### Multiplexing Fisico
 
 Nel multiplexing fisico (ovvero l'applicazione reale della definizione astratta del multiplexing), ogni sottocanale è definito esclusivamente sulla base di parametri fisici, come frequenza, tempo, codice, lunghezza d'onda, ecc. Questo approccio opera al livello fisico del modello di rete, dove un multiplexer suddivide il canale in sottocanali che vengono poi riassemblati da un demultiplexer sul lato ricevente.
 
-![Phisical Multiplexing](./images/02-1.png)
+<div align="center">
+  <img src="./images/02-1.png" alt="DUMB" width="450">
+</div>
 
 ## 2.4 - FDM (Frequency Division Multiplexing)
 
@@ -33,7 +35,7 @@ La struttura di un sistema FDM comprende:
 
 La relazione tra questi parametri è data da: B = n × (bₛ + bₑ), dove n è il numero di sottocanali.
 
-### FDM nella Telefonia
+#### FDM nella Telefonia
 
 Storicamente, l'FDM è stato utilizzato come tecnica di multiplexing per trasmettere chiamate vocali tra centrali telefoniche. La larghezza di banda di una chiamata vocale è approssimativamente di 4 kHz (da 300 Hz a 3600 Hz). In questo contesto, 12 canali/chiamate vocali di 4 kHz ciascuno venivano multiplexati su una larghezza di banda totale di 48 kHz (nell'intervallo tra 60 e 108 kHz). Successivamente, questa aggregazione di 48 kHz veniva ulteriormente multiplexata in aggregazioni ancora più grandi, secondo uno schema di modulazione gerarchico.
 
@@ -41,11 +43,15 @@ Storicamente, l'FDM è stato utilizzato come tecnica di multiplexing per trasmet
 
 Il Time Division Multiplexing (TDM) è una tecnica utilizzata principalmente per segnali digitali/binari (sequenze di 0 e 1). Dato un canale con velocità/capacità C (bit/s), vengono definiti intervalli di tempo (denominati slot), la cui durata è un multiplo della durata del bit tᵦ = 1/C.
 
-![TDM Multiplexing](./images/02-2.png)
+<div align="center">
+  <img src="./images/02-2.png" alt="DUMB" width="450">
+</div>
 
 Nel TDM, ogni sorgente/mittente può utilizzare un solo slot temporale ogni N slot. Viene quindi definita una struttura a frame, dove il frame è costituito da N slot temporali consecutivi. A ciascuno slot temporale viene assegnato un numero, e ogni sorgente/mittente è associato a un numero di slot temporale, potendo trasmettere solo all'interno di quello slot.
 
-![TDM Multiplexing](./images/02-4.png)
+<div align="center">
+  <img src="./images/02-3.png" alt="DUMB" width="450">
+</div>
 
 La struttura di un sistema TDM è caratterizzata da:
 - Durata del frame: T = N × nᵢ / C
@@ -53,13 +59,15 @@ La struttura di un sistema TDM è caratterizzata da:
 - Durata dello slot: Tᵢ = nᵢ / C
 - Velocità/capacità di ciascun sottocanale: c = C / N (bit/s)
 
-![TDM Multiplexing](./images/02-3.png)
+<div align="center">
+  <img src="./images/02-4.png" alt="DUMB" width="450">
+</div>
 
 È importante notare che ogni sorgente/mittente produce bit esattamente con velocità c. I nᵢ bit che si adattano allo slot devono essere già disponibili quando lo slot inizia. Chiaramente, la sorgente necessita di nᵢ/c secondi per produrre e accumulare i nᵢ bit.
 
 La scelta della durata dello slot è molto importante (questo è un parametro scelto quando viene progettato il sistema a slot). La capacità/velocità del sottocanale c non dipende da Tᵢ ma solo da N (c = C / N).
 
-### TDM/TDMA: Canali a diverse velocità
+#### TDM/TDMA: Canali a diverse velocità
 
 Se a ciascun sottocanale viene assegnato un singolo slot per frame, tutte le velocità di trasmissione sono uguali. In molti casi, però, è necessario multiplexare canali con velocità diverse. A questo scopo, è possibile utilizzare frame più complessi in cui a un canale possono essere assegnati più di uno slot.
 
@@ -72,11 +80,13 @@ Per semplicità, questo viene solitamente ottenuto utilizzando una gerarchia di 
 
 La tecnica CDM consiste nel miscelare (cioè, sommare) N flussi di bit (N trasmissioni), subito dopo averli moltiplicati ciascuno con una parola di codice Cᵢ scelta tra le N parole di codice di un codice ortogonale. Le parole di codice sono costituite da N simboli binari, chiamati chip per distinguerli dai bit, la cui durata è N volte più breve di un bit.
 
-### Codici Ortogonali
+#### Codici Ortogonali
 
 I codici ortogonali sono sequenze che soddisfano la proprietà di ortogonalità, espressa matematicamente come l'integrale del prodotto di due segnali o sequenze che risulta uguale a zero. Una famiglia di codici ortogonali comunemente utilizzata è rappresentata dalle matrici di Hadamard.
 
-![CD Multiplexing](./images/02-5.png)
+<div align="center">
+  <img src="./images/02-5.png" alt="DUMB" width="450">
+</div>
 
 Ad esempio, per N=4, i codici ortogonali sono:
 - C₀ = {1, 1, 1, 1}
@@ -84,11 +94,15 @@ Ad esempio, per N=4, i codici ortogonali sono:
 - C₂ = {1, 1, -1, -1}
 - C₃ = {1, -1, -1, 1}
 
-![CD Multiplexing](./images/02-6.png)
+<div align="center">
+  <img src="./images/02-6.png" alt="DUMB" width="450">
+</div>
 
 Nella multiplazione a divisione di codice, il codice "espande" la larghezza di banda radio del segnale, permettendo a diversi segnali di utilizzare la stessa banda radio.
 
-![CD Multiplexing](./images/02-7.png)
+<div align="center">
+  <img src="./images/02-7.png" alt="DUMB" width="450">
+</div>
 
 ### CDMA (Code Division Multiple Access)
 CDMA (Code Division Multiple Access) è un caso specifico di CDM, usato nei sistemi di telecomunicazione per permettere a più utenti di accedere simultaneamente a un canale senza interferenze significative.
@@ -109,23 +123,27 @@ Il limite tecnologico è legato alla stabilità dei LED/Laser utilizzati per mod
 
 L'accesso multiplo è simile al multiplexing, ma concettualmente è molto diverso. Infatti, l'accesso multiplo è legato ai canali broadcast. Quindi, le stazioni/nodi che accedono al canale broadcast sono distanti, quindi si trovano fisicamente in luoghi diversi, possibilmente molto lontani l'uno dall'altro, e quindi hanno bisogno di coordinarsi tra loro per accedere al canale senza collisioni!
 
-### FDMA (Frequency Division Multiple Access)
+#### FDMA (Frequency Division Multiple Access)
 
 L'FDMA è analogo all'FDM. Stazioni/nodi diversi devono coordinarsi per accedere al canale, ma questo non è un problema con l'FDMA. Esempi di utilizzo includono:
 1. la trasmissione di stazioni TV o radio 
 2. il sistema cellulare TACS (Total Access Cellular System) che utilizzava sottocanali da 25 kHz per le chiamate telefoniche.
 
-### TDMA (Time Division Multiple Access)
+#### TDMA (Time Division Multiple Access)
 
 L'accesso multiplo a divisione di tempo (TDMA) è simile al TDM, ma richiede che le stazioni si coordinino tra loro per trovare un riferimento temporale comune (necessario per sapere quando iniziano e finiscono gli slot/frame). Poiché la sincronizzazione non può essere perfetta, sono necessari tempi di guardia per evitare sovrapposizioni.
-![TDMA](./images/02-8.png)
+<div align="center">
+  <img src="./images/02-8.png" alt="DUMB" width="450">
+</div>
 
 ## 2.9 - Canali Broadcast Centralizzati e Distribuiti
 
 I canali broadcast possono essere classificati in base alla loro architettura:
 
 1. **Canali Broadcast Centralizzati**: Questi canali hanno un punto di accesso fisso (sistemi cellulari, WLAN, WMAN) che gestisce le connessioni con i dispositivi mobili. La copertura cellulare si ottiene mediante stazioni base (BS) o punti di accesso che forniscono accesso radio alle stazioni mobili (MS) all'interno di un'area di servizio chiamata cella.
-![](./images/02-9.png)
+<div align="center">
+  <img src="./images/02-9.png" alt="DUMB" width="450">
+</div>
 
 2. **Canali Broadcast Distribuiti**: Nei canali broadcast distribuiti, come le reti wireless ad-hoc (reti mesh, reti di sensori), le connessioni avvengono direttamente tra dispositivi mobili. In operazioni multi-hop, le stazioni mobili possono inoltrare informazioni, fungendo da relay tra la sorgente e la destinazione.
 
@@ -133,19 +151,21 @@ I canali broadcast possono essere classificati in base alla loro architettura:
 
 Nei canali broadcast centralizzati, la stazione base è fondamentale per garantire la sincronizzazione tra i terminali mobili. Le sue trasmissioni vengono utilizzate per sincronizzare tutte le trasmissioni (ad esempio, inviando un segnale per indicare quando inizia il frame).
 
-### Tempo di Guardia
+#### Tempo di Guardia
 
 A causa dei diversi tempi di propagazione tra la stazione base e i vari terminali mobili, è necessario inserire un tempo di guardia per evitare collisioni tra le trasmissioni. Il tempo di guardia è definito come il doppio del massimo tempo di propagazione tra la stazione base e il terminale più lontano: Tg = 2 × max(τi)
 
 Ovviamente, il tempo di guardia è dominato dal nodo più lontano dalla BS.
 
-### Timing Advance
+#### Timing Advance
 
 Per ottimizzare l'uso del canale, si può utilizzare la tecnica del Timing Advance: se ogni nodo conosce il ritardo di propagazione verso la BS, può anticipare la sua trasmissione! Il ritardo di propagazione τ deve essere stimato (può variare nel tempo). L'errore di stima è ancora possibile: i tempi di guardia sono ridotti, ma non sono nulli! Questa tecnica è utilizzata nel sistema GSM.
 
-### Efficiency
+#### Efficiency
 Diepnde srattamente dal ratio Tg/Ti. dove Ti altrono non è che lo slot di trasmissione meno la banda di guardia, mentre Tg è la banda di guardia stessa.
-![](./images/02-10.png)
+<div align="center">
+  <img src="./images/02-10.png" alt="DUMB" width="450">
+</div>
 
 
 ## 2.11 - Sistemi Cellulari Mobili
@@ -154,41 +174,45 @@ I sistemi cellulari mobili si sono evoluti attraverso diverse generazioni, ciasc
 1. UpLink: si ha Accesso Multiplo dai MS (Mobile Stations) alla BS (Base Station).
 2. DownLink: si ha multiplexing dalla BS veso le MS.
 
-#### Prima Generazione (1G)
+##### Prima Generazione (1G)
 - TACS (Europa)
 - AMPS (Stati Uniti)
 - Utilizzava FDM/FDMA (downlink/uplink)
 
-#### Seconda Generazione (2G)
+##### Seconda Generazione (2G)
 - GSM (Europa e poi mondiale)
 - D-AMPS (Stati Uniti)
 - Multi-carrier TDM/TDMA
 - 
-![](./images/02-11.png)
+<div align="center">
+  <img src="./images/02-11.png" alt="DUMB" width="450">
+</div>
 
-#### Terza Generazione (3G)
+##### Terza Generazione (3G)
 - UMTS
 - Utilizzava CDM/CDMA
 - HSPA (High Speed Packet Access, nota anche come 3.5G)
 
-#### Quarta Generazione (4G)
+##### Quarta Generazione (4G)
 - LTE (Long Term Evolution)
 
-![](./images/02-13.png)
+<div align="center">
+  <img src="./images/02-13.png" alt="DUMB" width="450">
+</div>
 
 ## 2.12 - Riuso di Frequenza
 
 Il riuso di frequenza nasce da un problema fondamentale: le frequenze disponibili non sono sufficienti per tutti gli utenti. La soluzione è riutilizzare le stesse frequenze in celle diverse attraverso il riuso spaziale. Nella pratica questa tecnica consiste nel riutiulizzare la stessa banda di frequenze utlizzata nella comunicazione BS-MS con una seconda coppia BS-MS a un certo numero di KM di distanza.
 
-### Interferenza Co-Canale
+#### Interferenza Co-Canale
 
 Il riuso spaziale causa inevitabilmente l'interferenza co-canale. Questa interferenza è una caratteristica intrinseca dei sistemi cellulari. Generalmente, si considera che la qualità del sistema sia buona quando il rapporto tra la potenza del segnale e la potenza di interferenza (Signal-to-Interference Ratio, SIR) è superiore a una soglia predefinita.
 
-### Forma delle Celle
+#### Forma delle Celle
 
 Tradizionalmente, per descrivere in modo semplificato la struttura dei sistemi cellulari, le celle vengono rappresentate con forma esagonale. Sebbene nella realtà la forma delle celle sia molto più irregolare a causa della posizione delle stazioni base e delle caratteristiche di propagazione dei segnali, la rappresentazione esagonale è un buon approccio per dimensionare il sistema e comprenderne i principi base.
 
-### Dimensionamento del Cluster
+#### Dimensionamento del Cluster
 
 Il processo di dimensionamento del cluster prevede:
 
@@ -197,17 +221,21 @@ Il processo di dimensionamento del cluster prevede:
 
 L'efficienza del riuso di frequenza è pari a 1/K. I valori possibili per K includono: 1, 3, 4, 7, 9, 12, 13, ecc.
 
-![](./images/02-12.png)
+<div align="center">
+  <img src="./images/02-12.png" alt="DUMB" width="450">
+</div>
 
 $$
 P_r= \frac{P_t \cdot G}{D_m}
 $$
 
-![](./images/02-14.png)
+<div align="center">
+  <img src="./images/02-14.png" alt="DUMB" width="450">
+</div>
 
 in base al numero K la distanza tra celle che utilizzano lo stesso set di frequenze cambia (mentre rimane inveriato il "raggio" degli esagoni)
 
-### Calcolo del SIR (Signal-to-Interference Ratio)
+#### Calcolo del SIR (Signal-to-Interference Ratio)
 
 Il dimensionamento dipende dalla stima del valore minimo di SIR tollerato dal sistema. Alcuni fattori chiave nel calcolo includono:
 - Potenza ricevuta
@@ -217,7 +245,7 @@ Il dimensionamento dipende dalla stima del valore minimo di SIR tollerato dal si
 Da cui possiamo dedurre:
 $K_min=\frac{(6SIR)^{2/η}}{3}$
 Approssimato al numero di K successivo possibile.
-### Considerazioni sul Dimensionamento
+#### Considerazioni sul Dimensionamento
 
 Nel modello di dimensionamento vengono fatte diverse semplificazioni:
 - Considerazione delle sole distanze
@@ -230,13 +258,10 @@ L'obiettivo è garantire un buon SIR a tutti gli utenti, considerando i casi pi�
 ## 2.13 - Antenne Settoriali
 L'uso di antenne direttive permette di modificare il layout cellulare e ridurre l'interferenza ricevuta. Nei sistemi cellulari, è comune l'uso di antenne con un angolo principale di 120°.
 
-### Vincoli di Assegnazione
+#### Vincoli di Assegnazione
 
 L'assegnazione dei canali è soggetta a vincoli aggiuntivi:
 - Le frequenze adiacenti possono generare interferenze reciproche
 - Le celle dello stesso sito non possono utilizzare frequenze adiacenti
 - I lobi secondari delle antenne possono generare interferenze nelle celle vicine
 
-## 2.14 - Layout Cellulari
-
-Un'osservazione importante è che la formula semplificata per il dimensionamento del cluster non dipende dal raggio della cella, ma solo dai rapporti di distanza. Questo offre la libertà di pianificare il layout cellulare (dimensioni delle celle) in base alla densità di traffico stimata in diverse aree.

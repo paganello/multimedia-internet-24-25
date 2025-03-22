@@ -71,9 +71,12 @@ Poiché un'entità può comunicare con più entità dello stesso livello, sono n
 
 ### Inoltro (Forwarding)
 Una volta scelto il SAP, la PDU deve essere inoltrata. La scelta del SAP di uscita avviene sulla base delle **tabelle di routing**, che contengono informazioni raccolte attraverso protocolli di routing.
-![Forwarding Example](./images/01-1.png)
 
-## 1.7 - Percorsi verso la Destinazione
+<div align="center">
+  <img src="./images/01-1.png" alt="DUMB" width="450">
+</div>
+
+## 1.3 - Percorsi verso la Destinazione
 
 Il routing può avvenire a diversi livelli dell'architettura:
 
@@ -83,7 +86,9 @@ Il routing può avvenire a diversi livelli dell'architettura:
 
 In una rete tipica, i nodi intermedi (come i router) elaborano i pacchetti fino al livello di rete, mentre i nodi terminali (come i computer) elaborano i pacchetti fino al livello applicativo.
 
-![PDU moving thows network](./images/01-2.png)
+<div align="center">
+  <img src="./images/01-2.png" alt="DUMB" width="450">
+</div>
 
 - *Router*: layer 3 (Transport)
 - *Switch*: layer 2/3 (Data-Link / Transport)
