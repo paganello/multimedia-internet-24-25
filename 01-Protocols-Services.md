@@ -2,13 +2,6 @@
 
 Un **servizio di comunicazione** fornisce il trasferimento di informazioni tra due o più entità remote. Quando due entità (A e B) necessitano di comunicare, il servizio di comunicazione gestisce lo scambio di informazioni tra di loro, creando un canale di dialogo che le collega attraverso i rispettivi nodi.
 
-I servizi di comunicazione trasferiscono diverse unità di informazione:
-- Parole
-- Bit
-- Gruppi di bit (frame o pacchetti)
-- File
-- Flussi multimediali
-
 Questi servizi possono essere descritti attraverso chiamate di servizio denominate **primitive di servizio**, che vengono utilizzate per:
 - Descrivere il servizio
 - Richiedere il servizio
@@ -19,15 +12,13 @@ Le primitive di servizio sono caratterizzate da vari parametri:
 - L'indirizzo di destinazione
 - Le caratteristiche del servizio richiesto
 
-## 1.1 - Tipologie di Servizi di Comunicazione
-
-### Servizi Orientati alla Connessione
+#### Servizi Orientati alla Connessione
 I servizi orientati alla connessione seguono tre fasi distinte:
 1. **Instaurazione della connessione**: le entità stabiliscono un canale dedicato
 2. **Trasferimento dati**: avviene lo scambio effettivo delle informazioni
 3. **Rilascio della connessione**: il canale viene terminato al completamento dello scambio
 
-### Servizi Senza Connessione (Connectionless)
+#### Servizi Senza Connessione (Connectionless)
 I servizi senza connessione:
 - Non richiedono un'instaurazione preliminare della connessione
 - Combinano tutte le fasi in un'unica operazione
@@ -35,13 +26,13 @@ I servizi senza connessione:
 - Non mantengono necessariamente una relazione tra diverse sessioni di trasferimento tra le stesse entità
 - Presentano sfide nell'implementazione di servizi tipicamente orientati alla connessione (come VoIP)
 
-## 1.2 - Architettura a Livelli
+## 1.1 - Architettura a Livelli
 
 L'architettura di rete è organizzata in **livelli** (layer), dove entità dello stesso livello possono offrire un servizio di comunicazione alle entità del livello superiore o inferiore. Questa struttura permette di gestire la complessità dei sistemi di comunicazione.
 
 Ogni livello implementa funzioni specifiche che arricchiscono il servizio offerto al livello superiore o inferiore. La comunicazione tra entità dello stesso livello (Tra dispositivi differenti) avviene attraverso **protocolli**.
 
-### Protocolli di Comunicazione
+#### Protocolli di Comunicazione
 
 Un **protocollo** è un insieme di regole che gestiscono la comunicazione tra entità dello stesso livello. Definisce:
 - Il formato dei messaggi
@@ -52,7 +43,7 @@ Le entità dello stesso livello si scambiano **Unità Dati di Protocollo** (PDU 
 - Un'intestazione (header): contiene informazioni di segnalazione
 - Un carico utile (payload): contiene i dati ricevuti dai livelli superiori
 
-## 1.3 - Vantaggi dell'Architettura a Livelli
+#### Vantaggi dell'Architettura a Livelli
 
 L'organizzazione a livelli offre numerosi benefici:
 - **Riduzione della complessità**: scompone problemi complessi in componenti gestibili
@@ -61,7 +52,7 @@ L'organizzazione a livelli offre numerosi benefici:
 - **Facilità di insegnamento e comprensione**: permette di studiare la rete per componenti
 - **Manutenzione semplificata**: permette aggiornamenti trasparenti al resto del sistema
 
-## 1.4 - Interfacce tra Livelli
+#### Interfacce tra Livelli
 
 L'interfaccia tra livelli è caratterizzata da **Punti di Accesso al Servizio** (SAP - Service Access Point). Attraverso questi punti:
 - Il livello N offre servizi al livello N+1
@@ -70,19 +61,7 @@ L'interfaccia tra livelli è caratterizzata da **Punti di Accesso al Servizio** 
 
 Il livello più basso è il livello **Fisico**, che gestisce il flusso di bit attraverso mezzi fisici come cavi o onde radio. Il SAP del livello fisico è una porta fisica.
 
-## 1.5 - Funzioni dei Livelli
-
-Le funzioni implementate dai vari livelli possono essere suddivise in:
-
-### Funzioni di Adattamento
-- **Multiplexing**: permette a più entità di livello superiore di utilizzare lo stesso servizio di livello inferiore
-- **Segmentazione**: divide unità dati di grandi dimensioni in unità più piccole gestibili dal livello inferiore
-
-### Funzioni di Miglioramento
-- **Controllo degli errori**: rileva e corregge errori di trasmissione
-- **Sequenziamento**: garantisce l'ordine corretto dei dati
-
-## 1.6 - Funzioni di Rete
+## 1.2 - Funzioni di Rete
 
 ### Routing e Indirizzamento
 Poiché un'entità può comunicare con più entità dello stesso livello, sono necessarie funzionalità di routing per selezionare il SAP appropriato (i router e gli switch hanno diverse interfacce di rete a livello fisico per esempio). Il routing viene effettuato utilizzando **indirizzi**:
