@@ -157,18 +157,28 @@ L'architettura Akamai utilizza il routing indiretto e la riscrittura URL. Un sit
 
 L'ARL (Akamai Resource Locator) è lo strumento che trasforma l'URL in un formato specifico per Akamai. In questo modo, il client accede ai server cache di Akamai e non al server di origine. Se il server Akamai non ha il contenuto memorizzato nella cache, questo viene richiesto al server di origine.
 
+<div align="center">
+  <img src="./images/08-7.png" width="450">
+</div>
+
 Akamai fornisce due livelli di reindirizzamento DNS:
 1. Akamai Top-Level Name Server (TLNS): localizzati con 4 negli Stati Uniti, 3 nell'UE e 1 in Asia. I TLNS rispondono con un LLNS, scelto da un set di 8 LLNS vicini all'utente.
 2. Akamai Low-Level Name Server (LLNS): puntano agli Akamai Edge Server che consegnano il contenuto ed eseguono il bilanciamento del traffico.
+
+<div align="center">
+  <img src="./images/08-8.png" width="350">
+</div>
 
 ## 8.12 - Architetture di YouTube e Netflix
 
 L'architettura di YouTube è organizzata con una struttura di cache a tre livelli: primario, secondario e terziario. Il bilanciamento del carico dei server è basato su informazioni di localizzazione. Ci sono circa 50 cache, di cui 40 primarie (circa 10 presso gli ISP), 8 secondarie e 5 terziarie.
 
+<div align="center">
+  <img src="./images/08-9.png" width="450">
+</div>
+
 Netflix, d'altra parte, ha il proprio Datacenter per funzioni di gestione (ad esempio registrazione e prezzi), mentre per il resto si basa sul Cloud AWS (Amazon Web Service) di Amazon per i server di streaming video. Utilizza tre CDN per la distribuzione di contenuti video con codifica scalabile.
 
-## 8.13 - Un nuovo paradigma: Information Centric Networking
-
-Progressivamente assistiamo a un cambiamento di paradigma nell'utilizzo principale di Internet, da un sistema di condivisione di risorse e conversazioni tra host a un sistema di distribuzione di contenuti in varie forme e con volumi crescenti.
-
-La consapevolezza di queste tendenze ha spinto allo studio di un nuovo paradigma per Internet che sposta l'attenzione sul trattamento dei contenuti: Information Centric Networking. Si tratta di un paradigma alternativo all'IP, basato sui contenuti piuttosto che sugli indirizzi IP.
+<div align="center">
+  <img src="./images/08-10.png" width="450">
+</div>
