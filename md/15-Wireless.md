@@ -193,3 +193,101 @@ Sono previste anche modalità a **basso consumo** durante la connessione (Hold, 
 
 Infine, più piconet possono essere interconnesse formando una **Scatternet**. Un dispositivo può partecipare a più piconet (come slave) o essere Master in una e Slave in altre. Questo permette topologie più complesse, ma la formazione e il routing nelle scatternet non sono standardizzati da Bluetooth.
 
+### 15.5 - Zigbee (IEEE 802.15.4)
+
+Mentre molte applicazioni wireless richiedono alte velocità di trasmissione (come WLAN e Bluetooth), esiste un segmento significativo di applicazioni che necessitano invece di **corto raggio, basso consumo energetico, basso costo** e basse velocità di trasmissione. Questo ha portato allo sviluppo delle tecnologie **LR-WPAN (Low Rate Wireless Personal Area Network)**, tra cui spicca **Zigbee**. 
+
+<div align="center">
+  <img src="./images/15-20.png" width="450">
+</div>
+
+Nato da soluzioni proprietarie per reti di sensori negli anni '90, lo sforzo di standardizzazione ha portato alla creazione del gruppo di lavoro IEEE 802.15 Task Group 4 nel 2001. Questo ha prodotto lo standard **IEEE 802.15.4** nel 2003, che definisce i livelli fisico (PHY) e MAC. La **Zigbee Alliance**, un consorzio industriale, ha poi costruito su questo standard definendo i livelli superiori (Network, Security, Application Interface) e profili applicativi specifici, dando vita alla tecnologia commercialmente nota come Zigbee.
+
+<div align="center">
+  <img src="./images/15-19.png" width="400">
+</div>
+
+Lo **stack protocollare** Zigbee è quindi composto dai livelli 802.15.4 (PHY/MAC) e dai livelli definiti dalla Zigbee Alliance. Il livello PHY si occupa della trasmissione/ricezione sul canale radio, usando la modulazione **DSSS (Direct Sequence Spread Spectrum)** su diverse bande di frequenza: 2.4 GHz (ISM, globale, 250 kbps, 16 canali), 915 MHz (ISM, Americhe, 40 kbps, 10 canali) e 868 MHz (Europa, 20 kbps, 1 canale). 
+
+<div align="center">
+  <img src="./images/15-21.png" width="450">
+</div>
+
+Zigbee definisce due tipi di dispositivi: **FFD (Full Function Device)**, capace di agire come coordinatore di rete, router o semplice dispositivo finale, e **RFD (Reduced Function Device)**, un dispositivo a funzionalità e consumo ridotti, tipicamente alimentato a batteria, che non può instradare traffico e comunica solo con un FFD (il suo parent). 
+
+Sono supportate tre **topologie** di rete: **Stella** (tutti i dispositivi comunicano solo con il PAN Coordinator centrale), **Mesh** (gli FFD possono instradare pacchetti peer-to-peer, offrendo maggiore robustezza) e **Cluster Tree** (una struttura gerarchica formata da cluster interconnessi, che permette un indirizzamento distribuito e scalabile).
+
+<div align="center">
+  <img src="./images/15-23.png" width="450">
+  <img src="./images/15-24.png" width="450">
+  <img src="./images/15-25.png" width="450">
+</div>
+
+
+Il livello **MAC 802.15.4** gestisce l'accesso al canale. Definisce due modalità operative: 
+- **Beacon-Enabled**, che utilizza un meccanismo **slotted CSMA/CA** sincronizzato da beacon periodici inviati dal coordinatore di rete (PAN Coordinator) e permette l'allocazione di GTS (Guaranteed Time Slots) per comunicazioni a bassa latenza.
+<div align="center">
+  <img src="./images/15-22.png" width="450">
+</div>
+
+- **Non-Beacon-Enabled**, che utilizza un meccanismo **unslotted CSMA/CA** classico (simile a 802.11 DCF) senza sincronizzazione. Il formato dei frame MAC include campi di controllo, indirizzamento (che può usare indirizzi lunghi a 64 bit IEEE o corti a 16 bit assegnati dal coordinatore), payload e checksum.
+
+<div align="center">
+  <img src="./images/15-26.png" width="450">
+</div>
+
+
+Il **livello di Rete** definito dalla Zigbee Alliance si occupa della configurazione della rete, dell'indirizzamento, della scoperta e gestione delle rotte, e della sicurezza. La formazione della rete inizia con un FFD (Full Function Device) che diventa PAN Coordinator, sceglie un canale e un PAN ID, e inizia a trasmettere beacon. Altri dispositivi possono unirsi scansionando i canali, ascoltando i beacon e associandosi al coordinatore o a un router FFD già presente. Il routing in Zigbee utilizza principalmente due algoritmi: **AODV (Ad-hoc On-demand Distance Vector)**, un protocollo reattivo semplice (descritto più avanti), e l'algoritmo **Cluster Tree**, che sfrutta l'indirizzamento gerarchico della topologia ad albero per un routing efficiente all'interno dell'albero stesso.
+
+Confrontando **Zigbee e Bluetooth (802.15.1)**, emergono differenze chiave: Zigbee usa DSSS mentre Bluetooth usa FHSS; Zigbee ha data rate significativamente inferiori ma permette un numero molto maggiore di dispositivi per rete (255 vs 8 attivi); i tempi di associazione alla rete e di risveglio da modalità sleep sono drasticamente più rapidi in Zigbee; Zigbee è ottimizzato per bassissimo consumo, spesso con batterie non ricaricabili con anni di durata, mentre Bluetooth è tipicamente ricaricabile.
+
+### 15.6 - Reti Ad Hoc
+
+Le **Mobile Ad Hoc Networks (MANET)** sono reti composte da nodi potenzialmente mobili, dotati di interfacce di comunicazione wireless, che operano **senza alcuna infrastruttura preesistente**. La comunicazione tra peer avviene spesso attraverso **salti multipli (multi-hop)**. L'implicazione principale è che ogni nodo deve agire sia come host (sorgente/destinazione di dati) sia come **router**, inoltrando traffico per conto di altri nodi. La **topologia della rete è dinamica**, cambiando a causa della mobilità dei nodi, dell'accensione/spegnimento o delle condizioni del canale.
+
+Le applicazioni delle MANET sono varie, spaziando da scenari di emergenza e recupero da disastri (forze dell'ordine, protezione civile) ad applicazioni civili (reti temporanee in conferenze, reti veicolari) e militari.
+
+Le sfide principali nelle MANET riguardano tutti i livelli dello stack protocollare. A livello fisico, la gestione della portata e della potenza; a livello MAC, i problemi classici del wireless come terminale nascosto/esposto, l'efficienza energetica e la fairness; a livello di rete, la sfida cruciale del **routing** in un ambiente dinamico e senza infrastruttura; a livello di trasporto, la difficoltà nel distinguere perdite dovute a congestione da quelle dovute a errori sul canale o mobilità.
+
+Il **routing nelle reti ad hoc** deve quindi adattarsi a topologie dinamiche, tenere conto delle risorse limitate (banda, energia, capacità di calcolo) e potenzialmente soddisfare criteri di performance specifici. Non esiste un unico protocollo ottimale per tutte le condizioni. I protocolli di routing per MANET si classificano principalmente in:
+
+1.  **Reattivi (On-Demand):** Trovano e mantengono rotte solo quando c'è effettivamente bisogno di inviare dati verso una destinazione. Comportano una latenza iniziale per la scoperta della rotta, ma hanno basso overhead in scenari di traffico scarso o bassa mobilità.
+2.  **Proattivi (Table-Driven):** Mantengono costantemente aggiornate le informazioni di routing verso tutte (o una parte) delle destinazioni possibili, indipendentemente dal traffico. Offrono bassa latenza per l'invio del primo pacchetto, ma generano un overhead di controllo continuo, che può essere elevato in reti molto dinamiche o grandi.
+3.  **Ibridi:** Combinano approcci proattivi (es. per nodi vicini) e reattivi (es. per nodi lontani) per bilanciare latenza e overhead.
+4.  **Geografici:** Utilizzano informazioni sulla posizione fisica dei nodi (ottenuta ad es. via GPS) per prendere decisioni di routing, spesso inoltrando i pacchetti al vicino geograficamente più prossimo alla destinazione.
+
+Una tecnica base per la consegna dei dati (o per la diffusione di informazioni di controllo) è il **Flooding**. Il nodo sorgente invia il pacchetto in broadcast ai suoi vicini; ogni nodo che riceve il pacchetto per la prima volta (identificato tramite numero di sequenza) lo inoltra a sua volta ai propri vicini. Il processo termina quando il pacchetto raggiunge la destinazione o tutti i nodi raggiungibili lo hanno ricevuto. Il flooding è semplice e potenzialmente robusto (può usare percorsi multipli), ma soffre di alto overhead (il "broadcast storm", dove molti nodi ritrasmettono inutilmente), possibili collisioni (specialmente tra nodi nascosti) e inaffidabilità intrinseca del broadcast a livello MAC. Per queste ragioni, il flooding puro è raramente usato per i dati, ma è spesso impiegato (in forme potenzialmente limitate) per la **diffusione di pacchetti di controllo**, come le richieste di scoperta di rotta nei protocolli reattivi.
+
+<div align="center">
+  <img src="./images/15-27.png" width="450">
+  <img src="./images/15-28.png" width="450">
+</div><br>
+
+**Dynamic Source Routing (DSR)** è un esempio di protocollo **reattivo**. Quando un nodo S deve inviare a D e non conosce una rotta, inizia una **Route Discovery** inondando la rete con un pacchetto **Route Request (RREQ)**. Ogni nodo intermedio che inoltra l'RREQ aggiunge il proprio identificatore alla lista contenuta nel pacchetto. Quando l'RREQ raggiunge la destinazione D, questa risponde con un **Route Reply (RREP)** inviato lungo il percorso inverso (ottenuto invertendo la lista nell'RREQ), contenente la rotta completa da S a D. Il nodo S, ricevuto l'RREP, memorizza la rotta e la inserisce nell'header di ogni pacchetto dati inviato a D (**source routing**). I nodi intermedi usano semplicemente l'header del pacchetto per sapere a chi inoltrarlo.
+
+<div align="center">
+  <img src="./images/15-29.png" width="450">
+  <img src="./images/15-30.png" width="450">
+  <img src="./images/15-31.png" width="450">
+  <img src="./images/15-32.png" width="450">
+  <img src="./images/15-33.png" width="450">
+  <img src="./images/15-34.png" width="450">
+</div><br>
+
+DSR utilizza estensivamente il **Route Caching**: ogni nodo memorizza le rotte che apprende (anche osservando pacchetti di dati o RREP destinati ad altri) e può usare queste rotte per rispondere a RREQ da cache, velocizzando la scoperta e riducendo il flooding. Tuttavia, DSR soffre di header di dimensione variabile (che cresce con la lunghezza della rotta), potenziale "reply storm" se molti nodi rispondono da cache, e problemi dovuti a cache "stantie" (rotte non più valide a causa della mobilità). La rottura di un link viene segnalata tramite pacchetti **Route Error (RERR)**.
+
+<div align="center">
+  <img src="./images/15-35.png" width="450">
+</div><br>
+
+**Ad Hoc On-Demand Distance Vector (AODV)** è un altro protocollo **reattivo** che cerca di migliorare DSR eliminando la necessità di inserire l'intera rotta negli header dei pacchetti dati. Mantiene invece **tabelle di routing** (next-hop) presso i nodi, ma solo per le destinazioni attive (per cui è stata scoperta una rotta), conservando così la natura on-demand.
+
+**Optimized Link State Routing (OLSR)** è un esempio di protocollo **proattivo** basato su Link State. Per ridurre l'overhead del flooding tipico dei protocolli link-state puri, OLSR introduce il concetto di **Multipoint Relays (MPRs)**, ovvero nodi selezionati da ciascun nodo come un sottoinsieme dei suoi vicini diretti. Ogni nodo sceglie un sottoinsieme dei propri vicini come MPRs, in modo tale che questi MPRs coprano tutti i nodi a due hop di distanza. Solo gli MPRs sono responsabili di inoltrare le informazioni sullo stato dei link (flooding ottimizzato). Le rotte calcolate da OLSR utilizzano quindi preferenzialmente gli MPRs come nodi intermedi.
+
+<div align="center">
+  <img src="./images/15-36.png" width="450">
+  <img src="./images/15-37.png" width="450">
+  <img src="./images/15-38.png" width="450">
+</div><br>
+
+Infine, il **Geographic Routing** non si basa sulla topologia ma sulla posizione fisica. Algoritmi come **GEDIR (Geographic Distance Routing)** tentano di inoltrare il pacchetto al vicino che minimizza la distanza geografica dalla destinazione finale. Questo approccio "greedy" può fallire in presenza di "vuoti" (regioni senza nodi più vicini alla destinazione). **GPSR (Greedy Perimeter Stateless Routing)** migliora GEDIR introducendo una modalità "perimeter" (o recovery): quando l'approccio greedy fallisce, il pacchetto viene instradato lungo il perimetro del "vuoto" (usando la regola della mano destra su un grafo reso planare) fino a quando non è possibile riprendere l'inoltro greedy. Questo richiede che i nodi costruiscano un grafo planare della loro vicinanza (es. Relative Neighbor Graph o Gabriel Graph).
