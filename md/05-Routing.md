@@ -110,7 +110,7 @@ Nei protocolli Distance Vector, i router scambiano informazioni specifiche sulla
 
 Il DV viene inviato solo ai router direttamente connessi, periodicamente e/o quando la topologia della rete cambia. La stima della distanza viene effettuata utilizzando l'algoritmo distribuito di Bellman-Ford.
 
-Quando un router riceve un DV, aumenta la distanza specificata aggiungendo il costo del collegamento corrente. Poi, per ogni destinazione specificata, aggiorna la tabella di routing se necessario.
+Quando un router riceve un DV, aumenta la distanza specificata aggiungendo il costo del collegamento corrente (uno). Poi, per ogni destinazione specificata, aggiorna la tabella di routing se necessario.
 
 <div align="center">
   <img src="./images/05-7.png" alt="DUMB" width="450">

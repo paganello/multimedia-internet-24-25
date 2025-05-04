@@ -47,5 +47,3 @@ Funzionamento del sistema finale:
   <img src="./images/09-5.png" width="450">
 </div>
 Questo approccio di pianificazione stocastica rappresenta un avanzamento rispetto ai metodi tradizionali basati su previsioni deterministiche, poiché incorpora l'incertezza nella domanda direttamente nel processo di pianificazione.
-
-Il documento si propone di affrontare e risolvere questo problema di ottimizzazione a due stadi, fornendo un modello matematico e metodi di soluzione appropriati, seguiti da risultati numerici che ne dimostrano l'efficacia.
