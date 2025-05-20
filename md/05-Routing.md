@@ -72,7 +72,7 @@ L'algoritmo inizializza la distanza dalla sorgente a se stessa come 0 e tutte le
 </div>
 
 La versione distribuita dell'algoritmo di Bellman-Ford converge in un numero finito di iterazioni. I nodi inviano periodicamente la loro stima del percorso minimo e aggiornano tale stima in base alle informazioni ricevute dai vicini.
-A ogni nodo e' assegnata una label (n, L) dove n e' il nodo successivo e L la lunghezza del collegamento, ogni nodo aggiorna la sua label in base alle label dei nodi vicini, quando le etichette non cambiano piu possiamo dire che l'albero del percorso piu breve e' stato costruito.
+A ogni nodo e' assegnata una label (n, L) dove n e' il nodo precedente e L la lunghezza del collegamento con esso, ogni nodo aggiorna la sua label in base ai percorsi che lo collegano con l'origine, quando le etichette non cambiano piu possiamo dire che l'albero del percorso piu breve e' stato costruito.
 
 <div align="center">
   <img src="./images/05-6.png" alt="DUMB" width="450">
